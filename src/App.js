@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import HelpmateChessboard from './board.jsx'
 
