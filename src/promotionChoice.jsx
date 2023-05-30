@@ -7,10 +7,10 @@ import {
 
 const PromotionChoice = ({onSelected}) => {
     return <div>
-        <button onClick={() => onSelected('q')}><FontAwesomeIcon icon={faChessQueen}/></button>
-        <button onClick={() => onSelected('r')}><FontAwesomeIcon icon={faChessRook}/></button>
-        <button onClick={() => onSelected('b')}><FontAwesomeIcon icon={faChessBishop}/></button>
-        <button onClick={() => onSelected('n')}><FontAwesomeIcon icon={faChessKnight}/></button>
+        <button onClick={() => onSelected('q')}><FontAwesomeIcon icon={faChessQueen} size='8x'/></button>
+        <button onClick={() => onSelected('r')}><FontAwesomeIcon icon={faChessRook} size='8x'/></button>
+        <button onClick={() => onSelected('b')}><FontAwesomeIcon icon={faChessBishop} size='8x'/></button>
+        <button onClick={() => onSelected('n')}><FontAwesomeIcon icon={faChessKnight} size='8x'/></button>
     </div>
 };
 

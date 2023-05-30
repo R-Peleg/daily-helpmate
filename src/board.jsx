@@ -47,11 +47,11 @@ const HelpmateChessboard = ({ fen, allowMoves, onLegalMove }) => {
     };
 
     return (
-        <div>
+        <div style={{position: 'relative'}}>
             <Chessboard
                 position={fen}
                 onPieceDrop={handleMove}
-                draggable={allowMoves}
+                arePiecesDraggable={allowMoves && pendingPromotion === undefined}
             />
             {pendingPromotion && <PromotionChoice onSelected={
                 p => {
