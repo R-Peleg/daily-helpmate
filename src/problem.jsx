@@ -22,6 +22,7 @@ const HelpmateProblem = ({ initialFen, moveCount }) => {
     const failed = !succeeded && (moves.length >= moveCount || chess.isGameOver());
 
     return <div>
+        <h2>Helpmate in {moveCount / 2} moves</h2>
         <HelpmateChessboard fen={currentFen} allowMoves={!failed && !succeeded} onLegalMove={handleMove} />
         <MovesDisplay moves={moves} totalMoveCount={moveCount} />
         <p>
