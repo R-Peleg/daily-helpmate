@@ -3,12 +3,6 @@ import HelpmateChessboard from "./board"
 import MovesDisplay from "./moves";
 import { Chess } from 'chess.js'
 
-const rootDivStyle = {
-    display: 'flex',
-    flexWrap: 'nowrap',
-    width: 'auto'
-}
-
 const HelpmateProblem = ({ initialFen, moveCount }) => {
     const [currentFen, setCurrentFen] = useState(initialFen);
     const [moves, setMoves] = useState([]);

@@ -2,7 +2,7 @@ import React from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faChessKing, faChessQueen, faChessRook,
-    faChessBishop, faChessKnight, faChessPawn
+    faChessBishop, faChessKnight
 } from '@fortawesome/free-solid-svg-icons'
 
 const moveDivStyle = {
@@ -46,7 +46,7 @@ const SingleMove = ({moveSan}) => {
 
 const MovesDisplay = ({ moves, totalMoveCount }) => {
     const emptySpaces = Math.max(0, totalMoveCount - moves.length);
-    const firstMovePlaceholder = totalMoveCount % 2 == 0 ? [<div style={moveDivStyle}>...</div>] : [];
+    const firstMovePlaceholder = totalMoveCount % 2 === 0 ? [<div style={moveDivStyle}>...</div>] : [];
     const movesDivs = moves.map(m => <div style={moveDivStyle}><SingleMove moveSan={m.san}/></div>);
     const emptySpacesDiv = Array.from(Array(emptySpaces), () => <div style={moveDivStyle}></div>);
     const allDivs = firstMovePlaceholder.concat(movesDivs, emptySpacesDiv)
