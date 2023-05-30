@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
 import PromotionChoice from './promotionChoice';
@@ -6,8 +6,8 @@ import PromotionChoice from './promotionChoice';
 const HelpmateChessboard = ({ fen, allowMoves, onLegalMove }) => {
     const chess = new Chess(fen);
     const [pendingPromotion, setPendingPromotion] = useState(undefined)
-    
-    const handleMove = ( sourceSquare, targetSquare, sourcePiece, promotion=undefined ) => {
+
+    const handleMove = (sourceSquare, targetSquare, sourcePiece, promotion = undefined) => {
         // Check for promotion
         const targetRow = targetSquare[1];
         const promotionRow = chess.turn() === 'w' ? '8' : '1';
@@ -15,8 +15,19 @@ const HelpmateChessboard = ({ fen, allowMoves, onLegalMove }) => {
             sourcePiece[1] === 'P' &&
             targetRow === promotionRow &&
             promotion === undefined) {
-                setPendingPromotion({sourceSquare, targetSquare, sourcePiece})
-                return;
+                // Check legality
+            try {
+                chess.move({
+                    from: sourceSquare,
+                    to: targetSquare,
+                    promotion: 'q'
+                });
+                chess.undo();
+            } catch (e) {
+                return; // Invalid move
+            }
+            setPendingPromotion({ sourceSquare, targetSquare, sourcePiece })
+            return;
         }
 
         let move = undefined;
@@ -47,7 +58,7 @@ const HelpmateChessboard = ({ fen, allowMoves, onLegalMove }) => {
                     setPendingPromotion(undefined);
                     handleMove(pendingPromotion.sourceSquare, pendingPromotion.targetSquare, pendingPromotion.sourcePiece, p);
                 }
-                }/>}
+            } />}
         </div>
     );
 };
