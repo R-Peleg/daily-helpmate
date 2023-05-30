@@ -21,7 +21,7 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
     useEffect(() => {
         setCurrentFen(initialFen);
         setMoves(arrayOfEmptyArrays(solutions));
-    }, [initialFen])
+    }, [initialFen, solutions])
 
     const handleMove = ({ fen, move }) => {
         setCurrentFen(fen);
@@ -37,9 +37,16 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
         setMoves(newMoves);
     }
 
+    let repeatedSolution = false;
+    for (let i = 0; i < currentSolution; i++) {
+        if (JSON.stringify(moves[i]) === JSON.stringify(moves[currentSolution])) {
+            repeatedSolution = true;
+        }
+    }
     const chess = new Chess(currentFen);
-    const succeeded = chess.turn() === 'b' && chess.isCheckmate();
-    const failed = !succeeded && (moves[currentSolution].length >= moveCount || chess.isGameOver());
+    const succeeded = !repeatedSolution && chess.turn() === 'b' && chess.isCheckmate();
+    const failed = !repeatedSolution && !succeeded && (moves[currentSolution].length >= moveCount || chess.isGameOver());
+    const inProgress = !succeeded && ! failed && !repeatedSolution;
 
     const handleNextSolutionClicked = () => {
         setCurrentSolution(currentSolution + 1);
@@ -50,11 +57,12 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
         <Typography variant="h4" gutterBottom>
             Helpmate in {moveCount / 2} moves
         </Typography>
-        <HelpmateChessboard fen={currentFen} allowMoves={!failed && !succeeded} onLegalMove={handleMove} />
+        <HelpmateChessboard fen={currentFen} allowMoves={inProgress} onLegalMove={handleMove} />
         <Typography variant="body1" gutterBottom>
-            {succeeded && (currentSolution === solutions - 1 ? "Success" : <>Found a solutions! <Button onClick={handleNextSolutionClicked}>Next</Button></>)}
+            {repeatedSolution && "This solution was already found"}
+            {succeeded && (currentSolution === solutions - 1 ? "Success" : <>Found a solution! <Button onClick={handleNextSolutionClicked}>Next</Button></>)}
             {failed && "Failed"}
-            {!failed && !succeeded && "In progress"}
+            {inProgress && "In progress"}
             </Typography>
         {Array.from(Array(solutions), (_, i) => 
             <MovesDisplay key={i} moves={moves[i]} totalMoveCount={moveCount} />
