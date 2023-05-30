@@ -40,7 +40,7 @@ const PieceIcon = ({piece}) => {
 
 const SingleMove = ({moveSan}) => {
     const piece = moveSan[0];
-    const square = moveSan.slice(1);
+    const square = moveSan.replace(/^RNBQK/g, '');
     return <><PieceIcon piece={piece}/>{square}</>
 }
 
