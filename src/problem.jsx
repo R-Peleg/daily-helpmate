@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import HelpmateChessboard from "./board"
 import MovesDisplay from "./moves";
 import { Chess } from 'chess.js'
@@ -14,9 +14,14 @@ const arrayOfEmptyArrays = (n) => {
   }
   
 const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
-    const [currentFen, setCurrentFen] = useState(initialFen);
+    const [currentFen, setCurrentFen] = useState(undefined);
     const [moves, setMoves] = useState(arrayOfEmptyArrays(solutions));
     const [currentSolution, setCurrentSolution] = useState(0);
+
+    useEffect(() => {
+        setCurrentFen(initialFen);
+        setMoves(arrayOfEmptyArrays(solutions));
+    }, [initialFen])
 
     const handleMove = ({ fen, move }) => {
         setCurrentFen(fen);
@@ -29,7 +34,7 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
         setCurrentFen(initialFen);
         const newMoves = moves.slice();
         newMoves[currentSolution] = [];
-        setMoves(arrayOfEmptyArrays(solutions));
+        setMoves(newMoves);
     }
 
     const chess = new Chess(currentFen);
