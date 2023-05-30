@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import HelpmateChessboard from "./board"
 import MovesDisplay from "./moves";
 import { Chess } from 'chess.js'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 
 const HelpmateProblem = ({ initialFen, moveCount }) => {
     const [currentFen, setCurrentFen] = useState(initialFen);
@@ -22,19 +24,22 @@ const HelpmateProblem = ({ initialFen, moveCount }) => {
     const failed = !succeeded && (moves.length >= moveCount || chess.isGameOver());
 
     return <div>
-        <h2>Helpmate in {moveCount / 2} moves</h2>
+        <Typography variant="h4" gutterBottom>
+            Helpmate in {moveCount / 2} moves
+        </Typography>
         <HelpmateChessboard fen={currentFen} allowMoves={!failed && !succeeded} onLegalMove={handleMove} />
         <MovesDisplay moves={moves} totalMoveCount={moveCount} />
-        <p>
+        <Typography variant="body1" gutterBottom>
+
             {
                 succeeded ? "Success" :
-                failed ? "Failed" :
-                "In progress"
+                    failed ? "Failed" :
+                        "In progress"
             }
-        </p>
-        <button onClick={reset}>
+        </Typography>
+        <Button onClick={reset}>
             Reset
-        </button>
+        </Button>
     </div>
 }
 

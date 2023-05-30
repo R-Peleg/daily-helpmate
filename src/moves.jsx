@@ -4,6 +4,7 @@ import {
     faChessKing, faChessQueen, faChessRook,
     faChessBishop, faChessKnight
 } from '@fortawesome/free-solid-svg-icons'
+import Box from '@mui/material/Box'
 
 const moveDivStyle = {
     width: '100px',
@@ -41,14 +42,14 @@ const PieceIcon = ({piece}) => {
 const SingleMove = ({moveSan}) => {
     const piece = moveSan[0];
     const square = moveSan.replace(/^RNBQK/g, '');
-    return <><PieceIcon piece={piece}/>{square}</>
+    return <Box><PieceIcon piece={piece}/>{square}</Box>
 }
 
 const MovesDisplay = ({ moves, totalMoveCount }) => {
     const emptySpaces = Math.max(0, totalMoveCount - moves.length);
-    const firstMovePlaceholder = totalMoveCount % 2 === 0 ? [<div style={moveDivStyle}>...</div>] : [];
+    const firstMovePlaceholder = totalMoveCount % 2 === 0 ? [<Box style={moveDivStyle}>...</Box>] : [];
     const movesDivs = moves.map(m => <div style={moveDivStyle}><SingleMove moveSan={m.san}/></div>);
-    const emptySpacesDiv = Array.from(Array(emptySpaces), () => <div style={moveDivStyle}></div>);
+    const emptySpacesDiv = Array.from(Array(emptySpaces), () => <Box style={moveDivStyle}></Box>);
     const allDivs = firstMovePlaceholder.concat(movesDivs, emptySpacesDiv)
     const divPairs = splitToPairs(allDivs)
     return <div style={moveContainerStyle}>
