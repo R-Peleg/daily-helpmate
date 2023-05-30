@@ -17,6 +17,13 @@ const problemJsons = [
     'fen': '8/8/8/4bN2/8/r5N1/4n1pp/1K1b2nk b - - 0 1',
     'moves': 2,
     'solutions': 3,
+  },
+  {
+    'author': 'Darvas, Róbert',
+    'year': 1953,
+    'fen': '7B/p4p2/4pPpp/4P1kb/3pP1p1/2pP2P1/K1P5/8 b - - 0 1',
+    'moves': 5,
+    'solutions': 1,
   }
 ]
 
@@ -34,6 +41,7 @@ function App() {
       >
         <MenuItem value={0}>Promotions, multi solution</MenuItem>
         <MenuItem value={1}>Black starts with check</MenuItem>
+        <MenuItem value={2}>H#5, stalemates</MenuItem>
     </Select>
     <HelpmateProblem initialFen={problemJson.fen} moveCount={problemJson.moves * 2} solutions={problemJson.solutions} />
   </>

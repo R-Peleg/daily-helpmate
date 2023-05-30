@@ -21,6 +21,7 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
     useEffect(() => {
         setCurrentFen(initialFen);
         setMoves(arrayOfEmptyArrays(solutions));
+        setCurrentSolution(0);
     }, [initialFen, solutions])
 
     const handleMove = ({ fen, move }) => {
