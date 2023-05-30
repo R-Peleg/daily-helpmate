@@ -30,7 +30,6 @@ const HelpmateProblem = ({ initialFen, moveCount }) => {
         <HelpmateChessboard fen={currentFen} allowMoves={!failed && !succeeded} onLegalMove={handleMove} />
         <MovesDisplay moves={moves} totalMoveCount={moveCount} />
         <Typography variant="body1" gutterBottom>
-
             {
                 succeeded ? "Success" :
                     failed ? "Failed" :

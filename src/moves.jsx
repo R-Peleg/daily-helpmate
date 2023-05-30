@@ -12,6 +12,9 @@ const moveDivStyle = {
     backgroundColor: 'rgb(220, 220, 220)',
     color: 'black',
     margin: '5px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
 }
 
 const moveContainerStyle = {
@@ -47,18 +50,18 @@ const SingleMove = ({moveSan}) => {
 
 const MovesDisplay = ({ moves, totalMoveCount }) => {
     const emptySpaces = Math.max(0, totalMoveCount - moves.length);
-    const firstMovePlaceholder = totalMoveCount % 2 === 0 ? [<Box style={moveDivStyle}>...</Box>] : [];
-    const movesDivs = moves.map(m => <div style={moveDivStyle}><SingleMove moveSan={m.san}/></div>);
-    const emptySpacesDiv = Array.from(Array(emptySpaces), () => <Box style={moveDivStyle}></Box>);
+    const firstMovePlaceholder = totalMoveCount % 2 === 0 ? [<Box sx={moveDivStyle}>...</Box>] : [];
+    const movesDivs = moves.map(m => <Box sx={moveDivStyle}><SingleMove moveSan={m.san}/></Box>);
+    const emptySpacesDiv = Array.from(Array(emptySpaces), () => <Box sx={moveDivStyle} ></Box>);
     const allDivs = firstMovePlaceholder.concat(movesDivs, emptySpacesDiv)
     const divPairs = splitToPairs(allDivs)
-    return <div style={moveContainerStyle}>
+    return <Box style={moveContainerStyle}>
         {divPairs.map((pair, idx) => <>
             {idx + 1}.
             {pair[0]}
             {pair[1]}
         </>)}
-    </div>
+    </Box>
 };
 
 export default MovesDisplay;
