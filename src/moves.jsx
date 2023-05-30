@@ -1,5 +1,9 @@
 import React from "react"
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faChessKing, faChessQueen, faChessRook,
+    faChessBishop, faChessKnight, faChessPawn
+} from '@fortawesome/free-solid-svg-icons'
 
 const moveDivStyle = {
     width: '100px',
@@ -36,10 +40,27 @@ const splitToPairs = (array) => array.reduce((accumulator, currentValue, index) 
     return accumulator;
 }, []);
 
+const PieceIcon = ({piece}) => {
+    const icon = {
+        'R': faChessRook,
+        'N': faChessKnight,
+        'B': faChessBishop,
+        'Q': faChessQueen,
+        'K': faChessKing,
+    }[piece]
+    return <FontAwesomeIcon icon={icon} />
+}
+
+const SingleMove = ({moveSan}) => {
+    const piece = moveSan[0];
+    const square = moveSan.slice(1);
+    return <><PieceIcon piece={piece}/>{square}</>
+}
+
 const MovesDisplay = ({ moves, totalMoveCount }) => {
     const emptySpaces = Math.max(0, totalMoveCount - moves.length);
     const firstMovePlaceholder = totalMoveCount % 2 == 0 ? [<div style={moveDivStyle}>...</div>] : [];
-    const movesDivs = moves.map(m => <div style={moveDivStyle}>{toPieceSymbol(m.san)}</div>);
+    const movesDivs = moves.map(m => <div style={moveDivStyle}><SingleMove moveSan={m.san}/></div>);
     const emptySpacesDiv = Array.from(Array(emptySpaces), () => <div style={moveDivStyle}></div>);
     const allDivs = firstMovePlaceholder.concat(movesDivs, emptySpacesDiv)
     const divPairs = splitToPairs(allDivs)
