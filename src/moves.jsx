@@ -39,7 +39,7 @@ const PieceIcon = ({piece}) => {
         'Q': faChessQueen,
         'K': faChessKing,
     }[piece]
-    return <FontAwesomeIcon icon={icon} />
+    return icon ? <FontAwesomeIcon icon={icon} /> : <></>;
 }
 
 const SingleMove = ({moveSan}) => {
