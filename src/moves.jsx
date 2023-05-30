@@ -19,19 +19,6 @@ const moveContainerStyle = {
     alignItems: 'center',
 }
 
-const toPieceSymbol = (san) => {
-    const pieceToSymbol = {
-        'R': '♜',
-        'N': '♞',
-        'B': '♝',
-        'Q': '♛',
-        'K': '♚',
-    }
-    return san.replace(/[RNBQK]/g, (char) => {
-        return pieceToSymbol[char];
-    });
-}
-
 const splitToPairs = (array) => array.reduce((accumulator, currentValue, index) => {
     if (index % 2 === 0) {
         accumulator.push([currentValue, array[index + 1]]);
