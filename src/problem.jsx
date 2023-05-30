@@ -18,7 +18,7 @@ const HelpmateProblem = ({ initialFen, moveCount }) => {
     }
 
     const chess = new Chess(currentFen);
-    const succeeded = chess.turn() == 'b' && chess.isCheckmate();
+    const succeeded = chess.turn() === 'b' && chess.isCheckmate();
     const failed = !succeeded && (moves.length >= moveCount || chess.isGameOver());
 
     return <div>
