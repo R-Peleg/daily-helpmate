@@ -41,7 +41,7 @@ const PieceIcon = ({piece}) => {
 
 const SingleMove = ({moveSan}) => {
     const piece = moveSan[0];
-    const square = moveSan.replace(/^RNBQK/g, '');
+    const square = moveSan.replace(/^[RNBQK]/g, '');
     return <Box><PieceIcon piece={piece}/>{square}</Box>
 }
 
