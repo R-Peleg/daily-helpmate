@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import HelpmateChessboard from "./board"
 import MovesDisplay from "./moves";
 import { Chess } from 'chess.js'

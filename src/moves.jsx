@@ -44,8 +44,12 @@ const PieceIcon = ({piece}) => {
 
 const SingleMove = ({moveSan}) => {
     const piece = moveSan[0];
-    const square = moveSan.replace(/^[RNBQK]/g, '');
-    return <Box><PieceIcon piece={piece}/>{square}</Box>
+    moveSan = moveSan.replace(/^[RNBQK]/g, '');
+    const promotionMatch = /[a-h][1-8]=([QRBK])/.exec(moveSan)
+    if (promotionMatch) {
+        moveSan = moveSan.replace(/[RNBQK]$/g, '');
+    }
+    return <Box><PieceIcon piece={piece}/>{moveSan}{promotionMatch && <PieceIcon piece={promotionMatch[1]}/>}</Box>
 }
 
 const MovesDisplay = ({ moves, totalMoveCount }) => {
