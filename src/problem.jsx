@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import HelpmateChessboard from "./board"
 import MovesDisplay from "./moves";
+import { Chess } from 'chess.js'
 
-const HelpmateProblem = ({ initialFen }) => {
+const HelpmateProblem = ({ initialFen, moveCount }) => {
     const [currentFen, setCurrentFen] = useState(initialFen);
     const [moves, setMoves] = useState([]);
 
@@ -16,9 +17,20 @@ const HelpmateProblem = ({ initialFen }) => {
         setMoves([]);
     }
 
+    const chess = new Chess(currentFen);
+    const succeeded = chess.turn() == 'b' && chess.isCheckmate();
+    const failed = !succeeded && (moves.length >= moveCount || chess.isGameOver());
+
     return <div>
-        <HelpmateChessboard fen={currentFen} onLegalMove={handleMove} />
-        <MovesDisplay moves={moves} totalMoveCount={4} />
+        <HelpmateChessboard fen={currentFen} allowMoves={!failed && !succeeded} onLegalMove={handleMove} />
+        <MovesDisplay moves={moves} totalMoveCount={moveCount} />
+        <p>
+            {
+                succeeded ? "Success" :
+                failed ? "Failed" :
+                "In progress"
+            }
+        </p>
         <button onClick={reset}>
             Reset
         </button>

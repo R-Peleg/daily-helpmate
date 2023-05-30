@@ -2,7 +2,7 @@ import React from 'react';
 import Chessboard from 'chessboardjsx';
 import { Chess } from 'chess.js';
 
-const HelpmateChessboard = ({ fen, onLegalMove }) => {
+const HelpmateChessboard = ({ fen, allowMoves, onLegalMove }) => {
     const chess = new Chess(fen);
     
     const handleMove = ({ sourceSquare, targetSquare }) => {
@@ -26,6 +26,7 @@ const HelpmateChessboard = ({ fen, onLegalMove }) => {
             <Chessboard
                 position={fen}
                 onDrop={handleMove}
+                draggable={allowMoves}
             />
         </div>
     );

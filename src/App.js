@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <HelpmateProblem initialFen={fen}/>
+        <HelpmateProblem initialFen={fen} moveCount={4}/>
       </header>
     </div>
   );
