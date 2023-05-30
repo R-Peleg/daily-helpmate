@@ -1,5 +1,5 @@
 import React from 'react';
-import Chessboard from 'chessboardjsx';
+import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
 
 const HelpmateChessboard = ({ fen, allowMoves, onLegalMove }) => {
