@@ -1,6 +1,7 @@
 import HelpmateProblem from './problem'
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import CenterColumn from './centerColumn';
 import { useState } from 'react';
 
 const problemJsons = [
@@ -35,15 +36,17 @@ function App() {
 
   const problemJson = problemJsons[problemIdx];
   return (<>
-    <Select
-      value={problemIdx}
-      onChange={handleChange}
+    <CenterColumn>
+      <Select
+        value={problemIdx}
+        onChange={handleChange}
       >
         <MenuItem value={0}>Promotions, multi solution</MenuItem>
         <MenuItem value={1}>Black starts with check</MenuItem>
         <MenuItem value={2}>H#5, stalemates</MenuItem>
-    </Select>
-    <HelpmateProblem initialFen={problemJson.fen} moveCount={problemJson.moves * 2} solutions={problemJson.solutions} />
+      </Select>
+      <HelpmateProblem initialFen={problemJson.fen} moveCount={problemJson.moves * 2} solutions={problemJson.solutions} />
+    </CenterColumn>
   </>
   );
 }
