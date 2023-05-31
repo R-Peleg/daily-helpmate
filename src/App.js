@@ -62,7 +62,9 @@ function App() {
         initialFen={problemJson.fen}
         moveCount={problemJson.moves * 2}
         solutions={problemJson.solutions}
-        variants={problemJson.variants}/>
+        variants={problemJson.variants}
+        author={problemJson.author}
+        year={problemJson.year}/>
     </CenterColumn>
   </>
   );

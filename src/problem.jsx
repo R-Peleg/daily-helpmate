@@ -14,7 +14,7 @@ const arrayOfEmptyArrays = (n) => {
     return arrayOfArrays;
   }
   
-const HelpmateProblem = ({ initialFen, moveCount, solutions, variants }) => {
+const HelpmateProblem = ({ initialFen, moveCount, solutions, variants, author, year }) => {
     if (!Number.isInteger(moveCount)) {
         throw new Error(`Invalid move count ${moveCount}`);
     }
@@ -69,6 +69,9 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants }) => {
     return <div>
         <Typography variant="h4" gutterBottom>
             Helpmate in {moveCount / 2} moves
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+            Author: {author}, {year}
         </Typography>
         <HelpmateChessboard fen={currentFen} allowMoves={inProgress} onLegalMove={handleMove} />
         <Typography variant="body1" gutterBottom>
