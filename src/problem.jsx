@@ -13,16 +13,26 @@ const arrayOfEmptyArrays = (n) => {
     return arrayOfArrays;
   }
   
-const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
+const HelpmateProblem = ({ initialFen, moveCount, solutions, variants }) => {
+    if (!Number.isInteger(moveCount)) {
+        throw new Error(`Invalid move count ${moveCount}`);
+    }
     const [currentFen, setCurrentFen] = useState(undefined);
     const [moves, setMoves] = useState(arrayOfEmptyArrays(solutions));
     const [currentSolution, setCurrentSolution] = useState(0);
+    let currentSolutionFen = initialFen;
+    if (currentSolution > 0 && variants) {
+        currentSolutionFen = variants[currentSolution - 1];
+    }
 
     useEffect(() => {
-        setCurrentFen(initialFen);
         setMoves(arrayOfEmptyArrays(solutions));
         setCurrentSolution(0);
-    }, [initialFen, solutions])
+    }, [initialFen, solutions]);
+
+    useEffect(() => {
+        setCurrentFen(currentSolutionFen);
+    }, [currentSolutionFen]);
 
     const handleMove = ({ fen, move }) => {
         setCurrentFen(fen);
@@ -32,7 +42,7 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
     }
 
     const reset = () => {
-        setCurrentFen(initialFen);
+        setCurrentFen(currentSolutionFen);
         const newMoves = moves.slice();
         newMoves[currentSolution] = [];
         setMoves(newMoves);
@@ -62,11 +72,11 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions }) => {
         <Typography variant="body1" gutterBottom>
             {repeatedSolution && "This solution was already found"}
             {succeeded && (currentSolution === solutions - 1 ? "Success" : <>Found a solution! <Button onClick={handleNextSolutionClicked}>Next</Button></>)}
-            {failed && "Failed"}
+            {failed && <span>Failed <Button onClick={reset}>Try again</Button></span>}
             {inProgress && "In progress"}
             </Typography>
-        {Array.from(Array(solutions), (_, i) => 
-            <MovesDisplay key={i} moves={moves[i]} totalMoveCount={moveCount} />
+        {moves.map((moveArr, i) => 
+            <MovesDisplay key={i} moves={moveArr} totalMoveCount={moveCount} />
         )}
         <Button onClick={reset}>
             Reset

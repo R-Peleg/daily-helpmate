@@ -25,6 +25,18 @@ const problemJsons = [
     'fen': '7B/p4p2/4pPpp/4P1kb/3pP1p1/2pP2P1/K1P5/8 b - - 0 1',
     'moves': 5,
     'solutions': 1,
+  },
+  {
+    'author': 'Nagy, Ödön',
+    'year': 1952,
+    'fen': '8/1P6/1p6/1p2K3/k7/8/8/8 b - - 0 1',
+    'moves': 2,
+    'solutions': 4,
+    'variants': [
+      '8/1P6/1p6/kp2K3/8/8/8/8 b - - 0 1',
+      '8/1P6/1p6/1p2K3/2k5/8/8/8 b - - 0 1',
+      '8/1P6/1p6/1pk1K3/8/8/8/8 b - - 0 1'
+    ]
   }
 ]
 
@@ -44,8 +56,13 @@ function App() {
         <MenuItem value={0}>Promotions, multi solution</MenuItem>
         <MenuItem value={1}>Black starts with check</MenuItem>
         <MenuItem value={2}>H#5, stalemates</MenuItem>
+        <MenuItem value={3}>Variants</MenuItem>
       </Select>
-      <HelpmateProblem initialFen={problemJson.fen} moveCount={problemJson.moves * 2} solutions={problemJson.solutions} />
+      <HelpmateProblem 
+        initialFen={problemJson.fen}
+        moveCount={problemJson.moves * 2}
+        solutions={problemJson.solutions}
+        variants={problemJson.variants}/>
     </CenterColumn>
   </>
   );
