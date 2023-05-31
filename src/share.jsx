@@ -40,9 +40,6 @@ const ShareButton = ({positionFen}) => {
 
     return <Box>
         <Typography>Share</Typography>
-        <Typography sx={{ fontFamily: 'Twitter', whiteSpace: 'pre-wrap', fontSize: '40px'}}>
-            {positionAscii}
-        </Typography>
         <TwitterShareButton
             url={shareUrl}
             title={quote}
