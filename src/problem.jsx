@@ -4,6 +4,7 @@ import MovesDisplay from "./moves";
 import { Chess } from 'chess.js'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import ShareButton from "./share";
 
 const arrayOfEmptyArrays = (n) => {
     const arrayOfArrays = [];
@@ -58,6 +59,7 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants }) => {
     const succeeded = !repeatedSolution && chess.turn() === 'b' && chess.isCheckmate();
     const failed = !repeatedSolution && !succeeded && (moves[currentSolution].length >= moveCount || chess.isGameOver());
     const inProgress = !succeeded && ! failed && !repeatedSolution;
+    const succeededAll = succeeded && currentSolution === solutions - 1;
 
     const handleNextSolutionClicked = () => {
         setCurrentSolution(currentSolution + 1);
@@ -71,7 +73,7 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants }) => {
         <HelpmateChessboard fen={currentFen} allowMoves={inProgress} onLegalMove={handleMove} />
         <Typography variant="body1" gutterBottom>
             {repeatedSolution && "This solution was already found"}
-            {succeeded && (currentSolution === solutions - 1 ? "Success" : <>Found a solution! <Button onClick={handleNextSolutionClicked}>Next</Button></>)}
+            {succeeded && (succeededAll ? "Success" : <>Found a solution! <Button onClick={handleNextSolutionClicked}>Next</Button></>)}
             {failed && <span>Failed <Button onClick={reset}>Try again</Button></span>}
             {inProgress && "In progress"}
             </Typography>
@@ -85,6 +87,10 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants }) => {
         <Button onClick={reset}>
             Reset
         </Button>
+        {succeededAll && <div>
+            <Typography>Solved the problem!</Typography>
+            <ShareButton positionFen={initialFen} />
+        </div>}
     </div>
 }
 
