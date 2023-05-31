@@ -45,7 +45,7 @@ const PieceIcon = ({piece}) => {
 const SingleMove = ({moveSan}) => {
     const piece = moveSan[0];
     moveSan = moveSan.replace(/^[RNBQK]/g, '');
-    const promotionMatch = /[a-h][1-8]=([QRBK])/.exec(moveSan)
+    const promotionMatch = /[a-h][1-8]=([QRBNK])/.exec(moveSan)
     if (promotionMatch) {
         moveSan = moveSan.replace(/[RNBQK]$/g, '');
     }
