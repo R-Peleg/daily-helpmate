@@ -75,9 +75,13 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants }) => {
             {failed && <span>Failed <Button onClick={reset}>Try again</Button></span>}
             {inProgress && "In progress"}
             </Typography>
-        {moves.map((moveArr, i) => 
-            <MovesDisplay key={i} moves={moveArr} totalMoveCount={moveCount} />
-        )}
+        {moves.map((moveArr, i) => {
+            const status = i < currentSolution ? 'success' :
+                i > currentSolution ? 'pending' :
+                succeeded ? 'success' :
+                failed ? 'failed' : 'in_progress';
+            return <MovesDisplay key={i} moves={moveArr} totalMoveCount={moveCount} status={status} />
+        })}
         <Button onClick={reset}>
             Reset
         </Button>
