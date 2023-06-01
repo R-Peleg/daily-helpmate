@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/daily-helpmate/static/js/main.d626bc1d.js",
+    "main.js": "/daily-helpmate/static/js/main.b09bea94.js",
     "static/js/787.4088c1ef.chunk.js": "/daily-helpmate/static/js/787.4088c1ef.chunk.js",
     "index.html": "/daily-helpmate/index.html",
-    "main.d626bc1d.js.map": "/daily-helpmate/static/js/main.d626bc1d.js.map",
+    "main.b09bea94.js.map": "/daily-helpmate/static/js/main.b09bea94.js.map",
     "787.4088c1ef.chunk.js.map": "/daily-helpmate/static/js/787.4088c1ef.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.d626bc1d.js"
+    "static/js/main.b09bea94.js"
   ]
 }
