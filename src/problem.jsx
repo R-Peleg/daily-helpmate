@@ -5,6 +5,7 @@ import { Chess } from 'chess.js'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import ShareButton from "./share";
+import HelpButton from "./helpButton";
 
 const arrayOfEmptyArrays = (n) => {
     const arrayOfArrays = [];
@@ -67,9 +68,12 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants, author, y
     }
 
     return <div>
-        <Typography variant="h4" gutterBottom>
-            Helpmate in {moveCount / 2} moves
-        </Typography>
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Typography variant="h4" gutterBottom>
+                Helpmate in {moveCount / 2} moves
+            </Typography>
+            <HelpButton/>
+        </div>
         <Typography variant="subtitle1" gutterBottom>
             Author: {author}, {year}
         </Typography>
