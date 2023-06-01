@@ -6,6 +6,10 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import ShareButton from "./share";
 import HelpButton from "./helpButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faCircle
+} from '@fortawesome/free-solid-svg-icons'
 
 const arrayOfEmptyArrays = (n) => {
     const arrayOfArrays = [];
@@ -78,6 +82,18 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants, author, y
             Author: {author}, {year}
         </Typography>
         <HelpmateChessboard fen={currentFen} allowMoves={inProgress} onLegalMove={handleMove} />
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+            <div style={{
+                width: '25px',
+                height: '25px',
+                borderRadius: "50%",
+                borderColor: 'black',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                backgroundColor: chess.turn() === 'w' ? 'white' : 'black',
+                }}/>
+            <Typography>{chess.turn() === 'b' ? "Black to move" : "White to move" }</Typography>
+        </div>
         <Typography variant="body1" gutterBottom>
             {repeatedSolution && "This solution was already found"}
             {succeeded && (succeededAll ? "Success" : <>Found a solution! <Button onClick={handleNextSolutionClicked}>Next</Button></>)}
