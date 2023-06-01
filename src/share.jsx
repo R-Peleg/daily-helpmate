@@ -94,7 +94,7 @@ const ShareButton = ({positionFen}) => {
     const shareUrl = document.location.href;
     const chess = new Chess(positionFen);
     const positionAscii = chessToAscii(chess);
-    const quote = 'Just solved the daily helpmate, check it out!\n' + positionAscii + '\n';
+    const quote = 'Just solved the daily helpmate!\n' + positionAscii + '\n';
 
     return <Box>
         <Typography>Share</Typography>
