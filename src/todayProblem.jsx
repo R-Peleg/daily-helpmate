@@ -18,7 +18,7 @@ const TodayProblem = () => {
                     setStatus('success');
                 })
         }
-    }, [])
+    }, [problemJson, todayProblemUrl])
 
     // Bridge FEN format
     if (problemJson && problemJson.fen.split(' ').length === 1) {
