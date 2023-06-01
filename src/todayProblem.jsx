@@ -24,6 +24,13 @@ const TodayProblem = () => {
     if (problemJson && problemJson.fen.split(' ').length === 1) {
         const color = Number.isInteger(problemJson.moves) ? 'b' : 'w';
         problemJson.fen = problemJson.fen + ' ' + color + ' - - 0 1';
+        if (problemJson.variants) {
+            for (let i = 0; i < problemJson.variants.length; i++) {
+                if (problemJson.variants[i].split(' ').length === 1) {
+                    problemJson.variants[i] = problemJson.variants[i] + ' ' + color + ' - - 0 1';
+                }
+            }
+        }
     }
 
     return <>
