@@ -82,7 +82,7 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants, author, y
             Author: {author}, {year}
         </Typography>
         <HelpmateChessboard fen={currentFen} allowMoves={inProgress} onLegalMove={handleMove} />
-        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+        {inProgress && <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
             <div style={{
                 width: '25px',
                 height: '25px',
@@ -94,6 +94,7 @@ const HelpmateProblem = ({ initialFen, moveCount, solutions, variants, author, y
                 }}/>
             <Typography>{chess.turn() === 'b' ? "Black to move" : "White to move" }</Typography>
         </div>
+        }
         <Typography variant="body1" gutterBottom>
             {repeatedSolution && "This solution was already found"}
             {succeeded && (succeededAll ? "Success" : <>Found a solution! <Button onClick={handleNextSolutionClicked}>Next</Button></>)}
